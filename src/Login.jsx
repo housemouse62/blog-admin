@@ -1,0 +1,101 @@
+import "./Login.css";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
+
+function Login() {
+  const navigate = useNavigate();
+  const [emailState, setEmailState] = useState("");
+  const [passwordState, setPasswordState] = useState("");
+  const { setTokenState, setUserState, tokenState, userState } = useAuth();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const fetchUser = async () => {
+      const url = "http://localhost:3000/users/login/";
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            email: emailState,
+            password: passwordState,
+          }),
+        });
+        const nextresponse = await response.json();
+        console.log(nextresponse);
+        console.log(nextresponse.user.usertype);
+
+        if (nextresponse.token && nextresponse.user.usertype === "author") {
+          alert("You are logged in");
+          setTokenState(nextresponse.token);
+          setUserState(nextresponse.user);
+          localStorage.setItem("token", nextresponse.token);
+          navigate("/posts");
+        } else alert("Check your login credentials");
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchUser();
+  }
+  useEffect(() => {
+    if (tokenState) navigate("/posts");
+  }, []);
+
+  return (
+    <>
+      <div className="login-div">
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div className="form-fields">
+            <div className="login-user">
+              <h1>User Login</h1>
+            </div>
+            <div className="form-field">
+              <label className="form-label">
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  className="form-input"
+                  placeholder=" "
+                  value={emailState}
+                  onChange={(e) => setEmailState(e.target.value)}
+                  autoComplete="email"
+                  required
+                />
+                <span>Email</span>
+              </label>
+            </div>
+            <div className="form-field">
+              <label className="form-label">
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  className="form-input"
+                  placeholder=" "
+                  value={passwordState}
+                  onChange={(e) => setPasswordState(e.target.value)}
+                  autoComplete="password"
+                  required
+                />
+                <span>Password</span>
+              </label>
+            </div>
+          </div>
+          <button type="submit" className="form-button">
+            Log In
+          </button>
+        </form>
+        <p>Not the author?</p>
+        Go to the blog
+      </div>
+    </>
+  );
+}
+
+export default Login;
