@@ -1,0 +1,17 @@
+header {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-bar a {
+  padding: 0.7rem 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: lowercase;
+}
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100px;
+}

@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import "./App.css";
 
 function App() {
   const { userState } = useAuth();
