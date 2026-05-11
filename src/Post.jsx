@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 import formatDate from "../utils/formatDate";
+import { useNavigate } from "react-router-dom";
 import "./Post.css";
 
 function Post() {
@@ -12,6 +13,7 @@ function Post() {
   const [refresh, setRefresh] = useState(0);
   const [replyState, setReplyState] = useState();
   const [replyingToCommentIDState, setReplyingToCommentIDState] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchposts = async () => {
@@ -35,6 +37,31 @@ function Post() {
     };
     fetchposts();
   }, [refresh]);
+
+  function handleDeletePost(e) {
+    e.preventDefault();
+
+    const deletePost = async () => {
+      const url = `http://localhost:3000/posts/${params.postID}`;
+      try {
+        const response = await fetch(url, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${tokenState}`,
+          },
+        });
+        const nextresponse = await response.json();
+        if (nextresponse.id) {
+          alert("Post Deleted");
+          setRefresh((prev) => prev + 1);
+          navigate("/posts");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    deletePost();
+  }
 
   function handleReplySubmit(e) {
     e.preventDefault();
@@ -128,6 +155,13 @@ function Post() {
         <h1 className="post-title">{post.title}</h1>
         <div className="post-wrapper">
           <p>{post.postbody}</p>
+          <Link
+            onClick={(e) => {
+              handleDeletePost(e, post.id);
+            }}
+          >
+            Delete
+          </Link>
           <div className="date-div">
             <p>{formatDate(post.posttime)}</p>
           </div>

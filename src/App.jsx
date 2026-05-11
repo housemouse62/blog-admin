@@ -4,14 +4,16 @@ import NavBar from "./NavBar";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import { useLocation } from "react-router-dom";
 import "./App.css";
 
 function App() {
   const { userState } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    if (userState) {
+    if (userState && location.pathname === "/") {
       navigate("/posts");
     }
   }, [userState]);
