@@ -7,9 +7,16 @@
   border-radius: 8px;
 }
 
+.post-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  min-width: 250px;
+}
+
 .date-div {
   display: flex;
-  justify-content: end;
+  align-self: flex-end;
   font-size: 12px;
   margin: 10px 20px;
 }
@@ -17,6 +24,11 @@
 .post-comments-div {
   display: flex;
   flex-direction: column;
+}
+
+.post-comment-box {
+  padding: 5px;
+  font-family: sans-serif;
 }
 
 .post-comments-div button {
@@ -33,13 +45,52 @@
 .comments-div {
   margin: 20px 10px;
 }
+
 .comment-div {
   display: flex;
+  flex-direction: column;
   width: fit-content;
   max-width: 50%;
-  text-align: start;
+}
+
+.comment-wrapper,
+.reply-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  min-width: 150px;
   background-color: rgb(235, 230, 230);
-  padding: 5px 10px;
-  margin: 20px 0 0 10px;
   border-radius: 8px;
+  padding: 5px 10px;
+}
+
+.reply-div {
+  margin: 15px 0 45px;
+}
+.reply-wrapper {
+  margin: 10px 35px;
+  background-color: rgb(244, 241, 241);
+  border-radius: 5px;
+}
+.comment-body {
+  display: flex;
+  text-align: start;
+}
+
+.comment-author {
+  align-self: flex-start;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 2px 0 0 0;
+}
+
+.comment-time {
+  align-self: flex-end;
+  font-size: 12px;
+}
+
+.reply-delete-div {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(148, 148, 239);
 }

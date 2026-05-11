@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
 import formatDate from "../utils/formatDate";
 import { Link } from "react-router-dom";
+import { useAuth } from "./AuthContext";
+
 import "./Posts.css";
 
 function Posts() {
   const [posts, setPosts] = useState([]);
+  const { userState, tokenState } = useAuth();
 
   useEffect(() => {
     const fetchposts = async () => {
-      const url = "http://localhost:3000/posts/";
+      const url = "http://localhost:3000/posts/allPosts/";
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          headers: {
+            Authorization: `Bearer ${tokenState}`,
+          },
+        });
         if (!response.ok) {
           throw new Error(`Response status: ${response.status}`);
         }
@@ -36,10 +43,15 @@ function Posts() {
 
             <div className="blog-time-comments-read">
               <div className="blog-link-date">
-                <Link className="blog-link" to={`${post.id}`}>
+                <Link className="blog-link" to={`/posts/${post.id}`}>
                   Read Post
                 </Link>
                 <p className="blog-time">{formatDate(post.posttime)}</p>
+                {!post.published ? (
+                  <p className="unpublished">DRAFT POST</p>
+                ) : (
+                  ""
+                )}
               </div>
               <p className="blog-comments">comments: {post._count.comments}</p>
             </div>

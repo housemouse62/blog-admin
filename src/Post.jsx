@@ -10,12 +10,18 @@ function Post() {
   const [commentState, setCommentState] = useState([]);
   const { userState, tokenState } = useAuth();
   const [refresh, setRefresh] = useState(0);
+  const [replyState, setReplyState] = useState();
+  const [replyingToCommentIDState, setReplyingToCommentIDState] = useState("");
 
   useEffect(() => {
     const fetchposts = async () => {
-      const url = `http://localhost:3000/posts/${params.postID}`;
+      const url = `http://localhost:3000/posts/allPosts/${params.postID}`;
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          headers: {
+            Authorization: `Bearer ${tokenState}`,
+          },
+        });
         if (!response.ok) {
           throw new Error(`Response status: ${response.status}`);
         }
@@ -30,7 +36,39 @@ function Post() {
     fetchposts();
   }, [refresh]);
 
-  function handleSubmit(e) {
+  function handleReplySubmit(e) {
+    e.preventDefault();
+
+    const fetchReply = async () => {
+      const url = `http://localhost:3000/posts/${params.postID}/${replyingToCommentIDState}/replies`;
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${tokenState}`,
+          },
+          body: JSON.stringify({
+            replybody: replyState,
+            commentID: replyingToCommentIDState,
+            authorID: userState.id,
+          }),
+        });
+        const nextresponse = await response.json();
+        if (nextresponse.id) {
+          alert("Reply Posted");
+          setRefresh((prev) => prev + 1);
+          setReplyState("");
+          setReplyingToCommentIDState("");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchReply();
+  }
+
+  function handleCommentSubmit(e) {
     e.preventDefault();
 
     const fetchComment = async () => {
@@ -61,20 +99,43 @@ function Post() {
     fetchComment();
   }
 
+  function handleDeleteComment(e, commentID) {
+    e.preventDefault();
+
+    const deleteComment = async () => {
+      const url = `http://localhost:3000/posts/${params.postID}/comments/${commentID}`;
+      try {
+        const response = await fetch(url, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${tokenState}`,
+          },
+        });
+        const nextresponse = await response.json();
+        if (nextresponse.id) {
+          alert("Comment Deleted");
+          setRefresh((prev) => prev + 1);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    deleteComment();
+  }
   return (
     <>
       <main className="post-div">
         <h1 className="post-title">{post.title}</h1>
-        <p>{post.postbody}</p>
-        <div className="date-div">
-          <p>{formatDate(post.posttime)}</p>
+        <div className="post-wrapper">
+          <p>{post.postbody}</p>
+          <div className="date-div">
+            <p>{formatDate(post.posttime)}</p>
+          </div>
         </div>
         {userState ? (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleCommentSubmit}>
             <div className="post-comments-div">
-              <label htmlFor="post-comment">
-                Have a comment? Let's hear it.
-              </label>
+              <label htmlFor="post-comment">Comment on your post?</label>
               <textarea
                 className="post-comment-box"
                 name="commentbody"
@@ -96,8 +157,68 @@ function Post() {
         <div className="comments-div">
           <h2 className="comments-title">Comments:</h2>
           {post.comments?.map((comment) => (
-            <div className="comment-div">
-              <p>{comment.commentbody}</p>
+            <div key={comment.id} className="comment-div">
+              <div className="comment-wrapper">
+                <p className="comment-author">
+                  {comment.author.name ? comment.author.name : "anonymous"}:
+                </p>
+                <div className="comment-body">
+                  <p>&ldquo;{comment.commentbody}&rdquo;</p>
+                </div>
+
+                <p className="comment-time">
+                  {formatDate(comment.commenttime)}
+                </p>
+              </div>
+              <div className="reply-delete-div">
+                <Link
+                  onClick={() =>
+                    replyingToCommentIDState === ""
+                      ? setReplyingToCommentIDState(comment.id)
+                      : setReplyingToCommentIDState("")
+                  }
+                >
+                  Reply
+                </Link>
+                <Link
+                  onClick={(e) => {
+                    handleDeleteComment(e, comment.id);
+                  }}
+                >
+                  Delete
+                </Link>
+              </div>
+              {replyingToCommentIDState === comment.id ? (
+                <div className="reply-area">
+                  <form onSubmit={handleReplySubmit}>
+                    <div className="post-comments-div">
+                      <label htmlFor="post-comment">Reply to Comment</label>
+                      <textarea
+                        className="post-comment-box"
+                        name="commentbody"
+                        id="post-comment"
+                        value={replyState}
+                        onChange={(e) => setReplyState(e.target.value)}
+                      />
+                      <button type="submit">Submit Reply</button>
+                    </div>
+                  </form>
+                </div>
+              ) : (
+                ""
+              )}
+              <div className="reply-div">
+                {comment.reply?.map((r) => (
+                  <div className="reply-wrapper">
+                    <p className="comment-author">
+                      {r.author.name ? r.author.name : "anonymous"}:
+                    </p>
+                    <div>&rdquo;{r.replybody}&ldquo;</div>
+
+                    <p className="comment-time">{formatDate(r.replytime)}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>

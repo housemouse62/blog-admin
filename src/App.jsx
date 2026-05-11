@@ -14,7 +14,7 @@ function App() {
     if (userState) {
       navigate("/posts");
     }
-  }, []);
+  }, [userState]);
 
   return (
     <>
