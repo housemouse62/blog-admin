@@ -69,7 +69,7 @@ function CreatePost() {
                 <span>Post Title</span>
               </label>
             </div>
-            <div className="form-field">
+            <div className="form-field postbody-div">
               <label className="form-label">
                 <textarea
                   type="text"
@@ -84,15 +84,15 @@ function CreatePost() {
                 <span>Post Body</span>
               </label>
             </div>
-            <div>
+            <div className="publish-div">
               <label htmlFor="published" className="published">
-                Publish?
+                Publish Post
               </label>
               <input
                 type="checkbox"
                 name="published"
                 id="published"
-                className="form-input"
+                className="form-checkbox"
                 checked={publishedState}
                 onChange={() => setPublishedState(!publishedState)}
               />

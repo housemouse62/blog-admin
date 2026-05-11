@@ -29,6 +29,10 @@ img {
   margin: 20px;
 }
 
+input {
+  font-family: "Times New Roman", Times, serif;
+}
+
 /* ─── Skip Link ─── */
 .skip-link {
   position: absolute;

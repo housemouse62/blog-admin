@@ -1,0 +1,21 @@
+.create-form {
+  height: 75%;
+}
+
+.form-input#postbody {
+  width: 75%;
+  min-height: 50vh;
+  padding: 5px;
+}
+
+.publish-div {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: start;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.form-checkbox {
+  width: 16px;
+}
