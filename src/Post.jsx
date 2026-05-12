@@ -14,7 +14,6 @@ function Post() {
   const [replyState, setReplyState] = useState();
   const [replyingToCommentIDState, setReplyingToCommentIDState] = useState("");
   const navigate = useNavigate();
-
   useEffect(() => {
     const fetchposts = async () => {
       const url = `http://localhost:3000/posts/allPosts/${params.postID}`;
@@ -194,7 +193,10 @@ function Post() {
             <div key={comment.id} className="comment-div">
               <div className="comment-wrapper">
                 <p className="comment-author">
-                  {comment.author.name ? comment.author.name : "anonymous"}:
+                  {comment.author.screenname
+                    ? comment.author.screenname
+                    : "anonymous"}
+                  :
                 </p>
                 <div className="comment-body">
                   <p>&ldquo;{comment.commentbody}&rdquo;</p>
@@ -245,7 +247,7 @@ function Post() {
                 {comment.reply?.map((r) => (
                   <div className="reply-wrapper">
                     <p className="comment-author">
-                      {r.author.name ? r.author.name : "anonymous"}:
+                      {r.author.screenname ? r.author.screenname : "anonymous"}:
                     </p>
                     <div>&rdquo;{r.replybody}&ldquo;</div>
 
