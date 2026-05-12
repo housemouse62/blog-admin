@@ -21,7 +21,7 @@ function NavBar() {
         {userState ? (
           <Link onClick={handleLogout}>Log Out</Link>
         ) : (
-          <Link to="/login">Log In</Link>
+          <Link to="/">Log In</Link>
         )}
       </div>
     </nav>

@@ -5,7 +5,8 @@
 }
 
 .form-button {
-  margin-top: 10px;
+  margin-top: 15px;
+  width: fit-content;
   font-size: 0.8rem;
   background: none;
   border: 1px solid rgb(91, 117, 53);
@@ -22,6 +23,11 @@
   background: blanchedalmond;
   color: black;
 }
+
+.login-button {
+  margin-bottom: 10px;
+}
+
 label {
   display: flex;
   flex-direction: column-reverse;
@@ -32,7 +38,9 @@ label > span {
   transform-origin: top left;
 }
 
-label > :is(input, textarea)[placeholder=" "]:not(:focus):placeholder-shown + span {
+label
+  > :is(input, textarea)[placeholder=" "]:not(:focus):placeholder-shown
+  + span {
   transform: translateY(1.5em) scale(1.25);
   pointer-events: none;
   opacity: 0.5;
@@ -47,4 +55,9 @@ label > :is(input, textarea)[placeholder=" "]:not(:focus):placeholder-shown + sp
 .create-link:hover {
   color: blue;
   font-size: 17px;
+}
+
+.form-link {
+  color: rgb(148, 148, 239);
+  margin-left: 10px;
 }

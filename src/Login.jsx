@@ -87,12 +87,14 @@ function Login() {
               </label>
             </div>
           </div>
-          <button type="submit" className="form-button">
+          <button type="submit" className="form-button login-button">
             Log In
           </button>
         </form>
         <p>Not the author?</p>
-        Go to the blog
+        <a className="form-link" href="http://localhost:5173">
+          Go to the blog
+        </a>
       </div>
     </>
   );

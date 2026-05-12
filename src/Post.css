@@ -31,13 +31,6 @@
   font-family: sans-serif;
 }
 
-.post-comments-div button {
-  width: fit-content;
-  padding: 3px 10px;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: none;
-}
 .post-comment-box {
   width: 400px;
   height: 200px;
@@ -51,6 +44,7 @@
   flex-direction: column;
   width: fit-content;
   max-width: 50%;
+  margin-top: 20px;
 }
 
 .comment-wrapper,
@@ -92,5 +86,14 @@
 .reply-delete-div {
   display: flex;
   justify-content: space-between;
+  color: rgb(148, 148, 239);
+}
+
+.post-date-div {
+  align-self: end;
+}
+
+.delete-post {
+  margin-left: 15px;
   color: rgb(148, 148, 239);
 }

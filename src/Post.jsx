@@ -155,28 +155,34 @@ function Post() {
         <div className="post-wrapper">
           <p>{post.postbody}</p>
           <Link
+            class="delete-post"
             onClick={(e) => {
               handleDeletePost(e, post.id);
             }}
           >
             Delete
           </Link>
-          <div className="date-div">
+          <div className="post-date-div">
             <p>{formatDate(post.posttime)}</p>
           </div>
         </div>
         {userState ? (
           <form onSubmit={handleCommentSubmit}>
             <div className="post-comments-div">
-              <label htmlFor="post-comment">Comment on your post?</label>
-              <textarea
-                className="post-comment-box"
-                name="commentbody"
-                id="post-comment"
-                value={commentState}
-                onChange={(e) => setCommentState(e.target.value)}
-              />
-              <button type="submit">Submit Comment</button>
+              <label htmlFor="post-comment">
+                <textarea
+                  className="post-comment-box"
+                  name="commentbody"
+                  placeholder=" "
+                  id="post-comment"
+                  value={commentState}
+                  onChange={(e) => setCommentState(e.target.value)}
+                />
+                <span>Comment on your post?</span>
+              </label>
+              <button type="submit" class="form-button">
+                Submit Comment
+              </button>
             </div>
           </form>
         ) : (
@@ -196,7 +202,6 @@ function Post() {
                   {comment.author.screenname
                     ? comment.author.screenname
                     : "anonymous"}
-                  :
                 </p>
                 <div className="comment-body">
                   <p>&ldquo;{comment.commentbody}&rdquo;</p>
@@ -228,33 +233,43 @@ function Post() {
                 <div className="reply-area">
                   <form onSubmit={handleReplySubmit}>
                     <div className="post-comments-div">
-                      <label htmlFor="post-comment">Reply to Comment</label>
-                      <textarea
-                        className="post-comment-box"
-                        name="commentbody"
-                        id="post-comment"
-                        value={replyState}
-                        onChange={(e) => setReplyState(e.target.value)}
-                      />
-                      <button type="submit">Submit Reply</button>
+                      <label htmlFor="post-comment">
+                        <textarea
+                          className="post-comment-box form-input"
+                          name="commentbody"
+                          id="post-comment"
+                          placeholder=" "
+                          value={replyState}
+                          onChange={(e) => setReplyState(e.target.value)}
+                        />
+                        <span>Reply to Comment</span>
+                      </label>
+                      <button type="submit" className="form-button">
+                        Submit Reply
+                      </button>
                     </div>
                   </form>
                 </div>
               ) : (
                 ""
               )}
-              <div className="reply-div">
-                {comment.reply?.map((r) => (
-                  <div className="reply-wrapper">
-                    <p className="comment-author">
-                      {r.author.screenname ? r.author.screenname : "anonymous"}:
-                    </p>
-                    <div>&rdquo;{r.replybody}&ldquo;</div>
+              {comment.reply?.length > 0 && (
+                <div className="reply-div">
+                  {comment.reply?.map((r) => (
+                    <div className="reply-wrapper">
+                      <p className="comment-author">
+                        {r.author.screenname
+                          ? r.author.screenname
+                          : "anonymous"}
+                        :
+                      </p>
+                      <div>&rdquo;{r.replybody}&ldquo;</div>
 
-                    <p className="comment-time">{formatDate(r.replytime)}</p>
-                  </div>
-                ))}
-              </div>
+                      <p className="comment-time">{formatDate(r.replytime)}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
