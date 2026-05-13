@@ -11,7 +11,7 @@ function Posts() {
 
   useEffect(() => {
     const fetchposts = async () => {
-      const url = "http://localhost:3000/posts/allPosts/";
+      const url = `${import.meta.env.VITE_API_URL}/posts/allPosts/`;
       try {
         const response = await fetch(url, {
           headers: {

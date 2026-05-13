@@ -38,7 +38,7 @@ function Profile() {
     e.preventDefault();
 
     const fetchUpdate = async () => {
-      const url = "http://localhost:3000/users/profile";
+      const url = `${import.meta.env.VITE_API_URL}/users/profile`;
 
       try {
         const response = await fetch(url, {

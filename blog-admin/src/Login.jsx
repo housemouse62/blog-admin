@@ -13,7 +13,7 @@ function Login() {
     e.preventDefault();
 
     const fetchUser = async () => {
-      const url = "http://localhost:3000/users/login/";
+      const url = `${import.meta.env.VITE_API_URL}/users/login/`;
       try {
         const response = await fetch(url, {
           method: "POST",
@@ -92,7 +92,7 @@ function Login() {
           </button>
         </form>
         <p>Not the author?</p>
-        <a className="form-link" href="http://localhost:5173">
+        <a className="form-link" href={import.meta.env.VITE_PUBLIC_URL}>
           Go to the blog
         </a>
       </div>
