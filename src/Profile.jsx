@@ -15,6 +15,24 @@ function Profile() {
   const [screennameState, setScreennameState] = useState("");
   const [editingState, setEditingState] = useState(false);
   const navigate = useNavigate();
+  const resetFields = {
+    email: () => {
+      setEmailState("");
+      setConfirmEmailState("");
+    },
+    name: () => {
+      setNameState("");
+    },
+    screenname: () => {
+      setScreennameState("");
+    },
+    password: () => {
+      setNewPasswordState("");
+      setConfirmNewPasswordState("");
+      setCurrentPasswordState("");
+    },
+  };
+  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -42,12 +60,14 @@ function Profile() {
         const nextresponse = await response.json();
         console.log("next response", nextresponse);
         if (nextresponse.user) {
-          alert("User Updated");
+          alert(`${capitalize(editingState)} Updated`);
           setUserState(nextresponse.user);
           setTokenState(nextresponse.token);
           localStorage.setItem("token", nextresponse.token);
+          resetFields[editingState]?.();
+          setEditingState(false);
           navigate("/profile");
-        } else alert("Error");
+        } else alert("Update Error. Check inputs and try again.");
       } catch (error) {
         console.error(error);
       }
@@ -88,7 +108,7 @@ function Profile() {
           </div>
           <div className="info-div">
             <p>
-              <b>Role:</b> {userState.usertype}
+              <b>Role:</b> {capitalize(userState.usertype)}
             </p>
           </div>
           <div className="info-div">

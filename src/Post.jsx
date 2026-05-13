@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
-import formatDate from "../utils/formatDate";
+import formatDate from "../util/formatDate";
 import { useNavigate } from "react-router-dom";
 import "./Post.css";
 

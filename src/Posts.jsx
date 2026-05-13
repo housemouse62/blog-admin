@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import formatDate from "../utils/formatDate";
+import formatDate from "../util/formatDate";
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import "./NavBar.css";
 
 function NavBar() {
   const { userState, setTokenState, setUserState } = useAuth();

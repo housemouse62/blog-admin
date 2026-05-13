@@ -54,7 +54,7 @@ function CreatePost() {
             <div className="create-user">
               <h1>Create Post</h1>
             </div>
-            <div className="form-field">
+            <div className="form-field form-title">
               <label className="form-label">
                 <input
                   type="text"

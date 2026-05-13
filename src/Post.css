@@ -29,12 +29,10 @@
 .post-comment-box {
   padding: 5px;
   font-family: sans-serif;
-}
-
-.post-comment-box {
   width: 400px;
   height: 200px;
 }
+
 .comments-div {
   margin: 20px 10px;
 }
