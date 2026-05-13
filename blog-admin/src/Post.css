@@ -1,0 +1,97 @@
+.post-div {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  border: 1px solid rgb(123, 120, 120);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.post-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  min-width: 250px;
+}
+
+.date-div {
+  display: flex;
+  align-self: flex-end;
+  font-size: 12px;
+  margin: 10px 20px;
+}
+
+.post-comments-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-comment-box {
+  padding: 5px;
+  font-family: sans-serif;
+  width: 400px;
+  height: 200px;
+}
+
+.comments-div {
+  margin: 20px 10px;
+}
+
+.comment-div {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  max-width: 50%;
+  margin-top: 20px;
+}
+
+.comment-wrapper,
+.reply-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  min-width: 150px;
+  background-color: rgb(235, 230, 230);
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+
+.reply-div {
+  margin: 15px 0 45px;
+}
+.reply-wrapper {
+  margin: 10px 35px;
+  background-color: rgb(244, 241, 241);
+  border-radius: 5px;
+}
+.comment-body {
+  display: flex;
+  text-align: start;
+}
+
+.comment-author {
+  align-self: flex-start;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 2px 0 0 0;
+}
+
+.comment-time {
+  align-self: flex-end;
+  font-size: 12px;
+}
+
+.reply-delete-div {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(148, 148, 239);
+}
+
+.post-date-div {
+  align-self: end;
+}
+
+.delete-post {
+  margin-left: 15px;
+  color: rgb(148, 148, 239);
+}

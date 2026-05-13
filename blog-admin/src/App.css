@@ -1,0 +1,71 @@
+/* ─── Reset ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+  display: block;
+  margin: 20px;
+}
+
+input {
+  font-family: "Times New Roman", Times, serif;
+}
+
+/* ─── Skip Link ─── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: rgb(133, 122, 122);
+  color: #fff;
+  padding: 0.4rem 1rem;
+  border-radius: 0 0 3px 3px;
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  z-index: 999;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Home */
+h1.home {
+  color: black;
+}
+
+h2.home {
+  color: black;
+}
+
+/* Main Body */
+.main-bg {
+  display: flex;
+  justify-content: center;
+}
+.site-main {
+  width: 80vw;
+  margin-top: 30px;
+}

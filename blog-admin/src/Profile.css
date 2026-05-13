@@ -1,0 +1,36 @@
+.profile-page {
+  display: flex;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
+}
+
+.info-div {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+}
+
+.info-div p {
+  font-size: 20px;
+}
+
+.info-div a {
+  color: rgb(148, 148, 239);
+}
+
+.change-information {
+  justify-self: start;
+}
+
+.update-form {
+  border: 1px solid black;
+  padding: 10px 20px 15px;
+}
+
+.form-button {
+  margin-top: 15px;
+}
